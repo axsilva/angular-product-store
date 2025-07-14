@@ -1,1 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+  margin: 0;
+  font-family: arial, sans-serif;
+}
+
+.ellipsis {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

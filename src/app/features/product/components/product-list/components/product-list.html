@@ -1,0 +1,45 @@
+<div class="product-container">
+  <div class="product-filter">
+    <label>Filter By Category</label>
+    <select (change)="onSelectCategory($event)">
+      <option value="" disabled selected>Select a category</option>
+      @for (category of categories(); track i; let i = $index) {
+        <option value="{{category}}" [selected]="selectedCategory() === category">{{ category }}</option>
+      }
+    </select>
+  </div>
+  <div class="product-grid">
+    @for (product of products(); track i; let i = $index) {
+      <div class="product-item">
+        <div class="product-item-cell product-image">
+          <img
+            ngSrc="{{product.image}}"
+            alt="{{product.image}}"
+            fill
+            priority
+          />
+        </div>
+        <div class="product-item-cell product-title">
+          <h4 class="ellipsis">
+            {{ product.title }}
+          </h4>
+        </div>
+        <div class="product-item-cell product-price">
+            <span class="price-text">
+              {{ product.price | currency }}
+            </span>
+          <span class="rating-text">
+              {{ product.rating.rate }} ({{ product.rating.count }})
+            </span>
+        </div>
+        <div class="product-item-cell product-options">
+          <button class="add-cart-button" (click)="onAddToCart(product)">🧺 Add to cart</button>
+        </div>
+      </div>
+    }
+  </div>
+</div>
+
+
+
+

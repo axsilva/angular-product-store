@@ -1,0 +1,6 @@
+<app-product-list [products]="products()"
+                  [categories]="categories()"
+                  [selectedCategory]="selectedCategory()"
+                  (addToCartEvent)="addToCart($event)"
+                  (selectCategoryEvent)="selectCategory($event)"
+></app-product-list>

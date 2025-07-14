@@ -1,0 +1,10 @@
+@if (toasts().length > 0) {
+  <div class="toast-container">
+    @for (toast of toasts(); track i; let i = $index) {
+      <div class="toast {{toast.type}}">
+        {{ toast.message }}
+      </div>
+    }
+  </div>
+}
+

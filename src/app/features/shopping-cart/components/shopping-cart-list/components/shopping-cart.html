@@ -1,0 +1,46 @@
+<div class="cart-container" style="border: 5px solid #dddddd; padding: 10px">
+  @if (productsCart().length === 0) {
+    <div class="cart-empty-state">
+      <h1>🛒</h1>
+      <h2>Empty Cart</h2>
+      <h4>Explore the application and discover the best promotions</h4>
+    </div>
+  } @else {
+    <div class="cart-content">
+      <div class="cart-grid">
+        @for (cart of productsCart(); track i; let i = $index) {
+          <div class="cart-item">
+            <div class="cart-item-cell cart-image">
+              @if (cart.image) {
+                <img
+                  ngSrc="{{cart.image}}"
+                  alt="{{cart.image}}"
+                  fill
+                  priority
+                />
+              }
+            </div>
+            <div class="cart-item-cell cart-info">
+              <h4 class="ellipsis">{{ cart.title }}</h4>
+              <div class="cart-item-controls">
+                <button class="cart-item-controls-decrement" [disabled]="cart.quantity <= 1"
+                        (click)="onDecreaseQuantity(cart.id)">-
+                </button>
+                <span>{{ cart.quantity }}</span>
+                <button class="cart-item-controls-increment" [disabled]="cart.quantity < 1"
+                        (click)="onIncreaseQuantity(cart.id)">+
+                </button>
+              </div>
+              <h4>{{ cart.totalPrice | currency }}</h4>
+              <button class="cart-item-remove-button" (click)="onRemoveFromCart(cart.id)">🗑️ Remove</button>
+            </div>
+          </div>
+        }
+      </div>
+      <div class="cart-total-price">
+        <span>Total: </span>
+        <h2>{{ totalCartPrice() | currency }}</h2>
+      </div>
+    </div>
+  }
+</div>

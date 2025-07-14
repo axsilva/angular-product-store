@@ -1,0 +1,6 @@
+<app-shopping-cart [productsCart]="productsCart()"
+                   [totalCartPrice]="totalCartPrice()"
+                   (increaseQuantityEvent)="increaseQuantity($event)"
+                   (decreaseQuantityEvent)="decreaseQuantity($event)"
+                   (removeFromCartEvent)="removeFromCart($event)"
+></app-shopping-cart>
