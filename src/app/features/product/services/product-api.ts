@@ -4,21 +4,23 @@ import { BehaviorSubject, Observable, switchMap } from 'rxjs';
 import { Product } from '../models';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProductApi {
   private httpClient = inject(HttpClient);
 
   private readonly baseUrl = 'https://fakestoreapi.com';
   private readonly products$: Observable<Product[]>;
-  private productsSubject: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  private productsSubject: BehaviorSubject<string> =
+    new BehaviorSubject<string>('');
   private selectedCategory: WritableSignal<string> = signal('');
 
   constructor() {
     this.products$ = this.productsSubject.pipe(
       switchMap((category: string) =>
-        category ? this.getProductsByCategory(category) : this.getProducts())
-    )
+        category ? this.getProductsByCategory(category) : this.getProducts()
+      )
+    );
   }
 
   getProductResults(): Observable<Product[]> {
@@ -35,7 +37,9 @@ export class ProductApi {
 
   getProductsByCategory(category?: string): Observable<Product[]> {
     this.selectedCategory.set(category ?? '');
-    return this.httpClient.get<Product[]>(`${this.baseUrl}/products/category/${category}`);
+    return this.httpClient.get<Product[]>(
+      `${this.baseUrl}/products/category/${category}`
+    );
   }
 
   getCategories(): Observable<string[]> {

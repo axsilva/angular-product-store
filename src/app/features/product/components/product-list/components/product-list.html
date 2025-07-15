@@ -2,7 +2,7 @@
   <div class="product-filter">
     <label>Filter By Category</label>
     <select (change)="onSelectCategory($event)">
-      <option value="" disabled selected>Select a category</option>
+      <option value="" selected>all</option>
       @for (category of categories(); track i; let i = $index) {
         <option value="{{category}}" [selected]="selectedCategory() === category">{{ category }}</option>
       }
