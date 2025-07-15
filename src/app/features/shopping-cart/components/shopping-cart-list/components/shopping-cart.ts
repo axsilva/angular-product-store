@@ -1,30 +1,35 @@
-import { Component, input, InputSignal, output, OutputEmitterRef } from '@angular/core';
-import { CurrencyPipe, NgOptimizedImage } from "@angular/common";
-import { CartOverview } from '../../../models';
+import {
+  Component,
+  input,
+  InputSignal,
+  output,
+  OutputEmitterRef,
+} from '@angular/core';
+import { CurrencyPipe, NgOptimizedImage } from '@angular/common';
+import { CartOverview, QuantityDirection } from '../../../models';
 
 @Component({
   selector: 'app-shopping-cart',
-  imports: [
-    CurrencyPipe,
-    NgOptimizedImage
-  ],
+  imports: [CurrencyPipe, NgOptimizedImage],
   templateUrl: './shopping-cart.html',
-  styleUrl: './shopping-cart.scss'
+  styleUrl: './shopping-cart.scss',
 })
 export class ShoppingCart {
-  public readonly productsCart: InputSignal<CartOverview[]> = input<CartOverview[]>([]);
+  public readonly productsCart: InputSignal<CartOverview[]> = input<
+    CartOverview[]
+  >([]);
   public readonly totalCartPrice: InputSignal<number> = input<number>(0);
 
-  public increaseQuantityEvent: OutputEmitterRef<number> = output<number>();
-  public decreaseQuantityEvent: OutputEmitterRef<number> = output<number>();
+  public changeQuantityEvent: OutputEmitterRef<{
+    id: number;
+    direction: QuantityDirection;
+  }> = output<{ id: number; direction: QuantityDirection }>();
   public removeFromCartEvent: OutputEmitterRef<number> = output<number>();
 
-  onIncreaseQuantity(id: number) {
-    this.increaseQuantityEvent.emit(id);
-  }
+  public quantityDirection = QuantityDirection;
 
-  onDecreaseQuantity(id: number) {
-    this.decreaseQuantityEvent.emit(id);
+  onChangeQuantity(id: number, direction: QuantityDirection) {
+    this.changeQuantityEvent.emit({ id, direction });
   }
 
   onRemoveFromCart(id: number) {

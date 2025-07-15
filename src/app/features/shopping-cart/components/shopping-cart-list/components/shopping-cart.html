@@ -24,11 +24,11 @@
               <h4 class="ellipsis">{{ cart.title }}</h4>
               <div class="cart-item-controls">
                 <button class="cart-item-controls-decrement" [disabled]="cart.quantity <= 1"
-                        (click)="onDecreaseQuantity(cart.id)">-
+                        (click)="onChangeQuantity(cart.id, quantityDirection.DECREASE)">-
                 </button>
                 <span>{{ cart.quantity }}</span>
                 <button class="cart-item-controls-increment" [disabled]="cart.quantity < 1"
-                        (click)="onIncreaseQuantity(cart.id)">+
+                        (click)="onChangeQuantity(cart.id, quantityDirection.INCREASE)">+
                 </button>
               </div>
               <h4>{{ cart.totalPrice | currency }}</h4>
